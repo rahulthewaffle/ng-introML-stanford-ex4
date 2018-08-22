@@ -63,7 +63,21 @@ J = 1/m * sum(sum(costMatrix,1),2);
 %               over the training examples if you are implementing it for the 
 %               first time.
 
+for i = 1:m
+  z2 = [1 X(i,:)] * Theta1';
+  a2 = sigmoid(z2);
+  a3 = sigmoid([1 a2] * Theta2');
+  
+  delta3 = h(i,:) - yUn(i,:);
+  delta2 = (delta3 * Theta2) .* sigmoidGradient([1 z2]);
+  
+  Theta1_grad = Theta1_grad + delta2(2:end)' * [1 X(i,:)];
+  Theta2_grad = Theta2_grad + delta3' * [1 a2];
+  
+endfor
 
+Theta1_grad = 1/m * Theta1_grad;
+Theta2_grad = 1/m * Theta2_grad;
 
 % Part 3: Implement regularization with the cost function and gradients.
 %

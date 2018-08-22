@@ -5,10 +5,10 @@ function h = predict(Theta1, Theta2, X)
 
 % Useful values
 m = size(X, 1);
-num_labels = size(Theta2, 1);
+k = size(Theta2, 1);
 
 % You need to return the following variables correctly 
-p = zeros(size(X, 1), 1);
+h = zeros(m, k);
 
 a1 = sigmoid([ones(m, 1) X] * Theta1');
 h = sigmoid([ones(m, 1) a1] * Theta2');
