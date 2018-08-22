@@ -228,6 +228,6 @@ pause;
 %  you compute the training set accuracy.
 
 h = predict(Theta1, Theta2, X);
-[dummy, pred] = max(a2, [], 2);
+[dummy, pred] = max(h, [], 2);
 
 fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);

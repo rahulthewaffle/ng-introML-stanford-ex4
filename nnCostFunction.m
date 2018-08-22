@@ -45,7 +45,7 @@ Theta2_grad = zeros(size(Theta2));
 
 h = predict(Theta1, Theta2, X);
 costMatrix = -yUn .* log(h) - (1-yUn) .* log(1-h);
-J = sum(sum(costMatrix,1),2)
+J = 1/m * sum(sum(costMatrix,1),2);
 
 %
 % Part 2: Implement the backpropagation algorithm to compute the gradients
@@ -62,7 +62,9 @@ J = sum(sum(costMatrix,1),2)
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
-%
+
+
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
@@ -71,21 +73,8 @@ J = sum(sum(costMatrix,1),2)
 %               and Theta2_grad from Part 2.
 %
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Jreg = lambda/(2*m) * ((sum(sum(Theta1(:,2:end).^2))) + sum(sum(Theta2(:,2:end).^2)));
+J += Jreg;
 
 
 
