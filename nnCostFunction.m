@@ -3,7 +3,7 @@ function [J grad] = nnCostFunction(nn_params, ...
                                    hidden_layer_size, ...
                                    num_labels, ...
                                    X, y, lambda)
-%NNCOSTFUNCTION Implements the neural network cost function for a two layer
+%NNCOSTFUNCTION Implements the neural network cost function for a three layer
 %neural network which performs classification
 %   [J grad] = NNCOSTFUNCTON(nn_params, hidden_layer_size, num_labels, ...
 %   X, y, lambda) computes the cost and gradient of the neural network. The
@@ -24,6 +24,10 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
 
 % Setup some useful variables
 m = size(X, 1);
+n = input_layer_size;
+s2 = hidden_layer_size;
+k = num_labels;
+yUn = unrollOutput(y,k);
          
 % You need to return the following variables correctly 
 J = 0;
@@ -38,6 +42,11 @@ Theta2_grad = zeros(size(Theta2));
 %         variable J. After implementing Part 1, you can verify that your
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
+
+h = predict(Theta1, Theta2, X);
+costMatrix = -yUn .* log(h) - (1-yUn) .* log(1-h);
+J = sum(sum(costMatrix,1),2)
+
 %
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
