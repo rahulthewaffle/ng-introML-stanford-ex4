@@ -90,7 +90,8 @@ Theta2_grad = 1/m * Theta2_grad;
 Jreg = lambda/(2*m) * ((sum(sum(Theta1(:,2:end).^2))) + sum(sum(Theta2(:,2:end).^2)));
 J += Jreg;
 
-
+Theta1_grad(:,2:end) += lambda/m * Theta1(:,2:end);
+Theta2_grad(:,2:end) += lambda/m * Theta2(:,2:end);
 
 % -------------------------------------------------------------
 
